@@ -1,4 +1,5 @@
 import React from "react";
+import dotenv from "react-dotenv";
 import axios from "axios";
 import "../Styles/Main.css";
 import { Spinner } from "@chakra-ui/react";
@@ -14,6 +15,7 @@ import {
 } from "@chakra-ui/react";
 
 function Login() {
+  const apiUrl = process.env.REACT_APP_API_URL;
   const { setEmpleado, empleado } = React.useContext(UseContext);
   const [login, setLogin] = React.useState(false);
   const emailInput = React.useRef(null);
@@ -38,13 +40,10 @@ function Login() {
 
     try {
       if (!!email && !!password) {
-        const response = await axios.post(
-          "http://localhost:3900/empleoyee/login",
-          {
-            email,
-            password,
-          }
-        );
+        const response = await axios.post(apiUrl + "/empleoyee/login", {
+          email,
+          password,
+        });
         if (response.status === 200) {
           setTimeout(() => {
             const empleadoServ = response.data.empleoyee;
