@@ -35,6 +35,7 @@ import { useNavigate } from "react-router-dom";
 import { UseContext } from "../Context/UseContext";
 
 function Cesantias() {
+  const apiUrl = process.env.REACT_APP_API_URL;
   const navigate = useNavigate();
   const { empleado, setEmpleado } = React.useContext(UseContext);
   const [searchDocument, setSearchDocument] = React.useState();
@@ -95,7 +96,7 @@ function Cesantias() {
   //useEffect para traer las cesantias desde la DB
   React.useEffect(() => {
     const getCesantias = async () => {
-      const response = await axios.get("http://localhost:3900/layoffs/getAll");
+      const response = await axios.get(apiUrl + "/layoffs/getAll");
 
       if (response.status === 200) {
         const cesantiasServ = response.data.ces;
@@ -109,7 +110,7 @@ function Cesantias() {
 
   //Funciones encargadas de la logica del componente
   const getEmpleados = async () => {
-    const response = await axios.get("http://localhost:3900/empleoyee/");
+    const response = await axios.get(apiUrl + "/empleoyee/");
 
     if (response.status === 200) {
       const employeeServ = response.data.emp;
@@ -118,7 +119,7 @@ function Cesantias() {
   };
 
   const getEmpleadobyId = async (Eid) => {
-    const response = await axios.get("http://localhost:3900/empleoyee/" + Eid);
+    const response = await axios.get(apiUrl + "/empleoyee/" + Eid);
 
     if (response.status === 200) {
       const employeeServ = response.data.empleoyee;
@@ -166,20 +167,17 @@ function Cesantias() {
   };
 
   const handleSubmitUpdate = async () => {
-    const response = await axios.put(
-      "http://localhost:3900/layoffs/update/" + focus._id,
-      {
-        isSaved: savedRef.current.checked,
-        startDate: dateRef.current.value,
-        quantity: parseInt(quantityRef.current.value),
-      }
-    );
+    const response = await axios.put(apiUrl + "/layoffs/update/" + focus._id, {
+      isSaved: savedRef.current.checked,
+      startDate: dateRef.current.value,
+      quantity: parseInt(quantityRef.current.value),
+    });
     setLoading(true);
     onCloseUpdate();
   };
 
   const handleSubmitNew = async () => {
-    const response = await axios.post("http://localhost:3900/layoffs/save/", {
+    const response = await axios.post(apiUrl + "/layoffs/save/", {
       user_id: searchDocument,
       isSaved: savedRef.current.checked,
       startDate: dateRef.current.value,
@@ -191,7 +189,7 @@ function Cesantias() {
 
   const handleDelete = async () => {
     const response = await axios.delete(
-      "http://localhost:3900/layoffs/delete/" + focus._id
+      apiUrl + "/layoffs/delete/" + focus._id
     );
     setLoading(true);
     onCloseDelete();

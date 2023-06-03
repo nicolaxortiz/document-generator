@@ -26,6 +26,7 @@ import Main from "../Components/Main";
 import Footer from "../Components/Footer";
 
 function UpdatePersonal() {
+  const apiUrl = process.env.REACT_APP_API_URL;
   const { setEmpleado, empleado } = React.useContext(UseContext);
   const [login, setLogin] = React.useState(false);
   const navigate = useNavigate();
@@ -85,20 +86,17 @@ function UpdatePersonal() {
       !!email
     ) {
       try {
-        const response = await axios.put(
-          "http://localhost:3900/update/" + empleado?._id,
-          {
-            name,
-            lastName,
-            document,
-            birthDate,
-            country,
-            region,
-            city,
-            address,
-            email,
-          }
-        );
+        const response = await axios.put(apiUrl + "/update/" + empleado?._id, {
+          name,
+          lastName,
+          document,
+          birthDate,
+          country,
+          region,
+          city,
+          address,
+          email,
+        });
         if (response.status === 200) {
           setTimeout(() => {
             onOpenMsg();

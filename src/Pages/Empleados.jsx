@@ -35,6 +35,7 @@ import { useNavigate } from "react-router-dom";
 import { UseContext } from "../Context/UseContext";
 
 function Empleados() {
+  const apiUrl = process.env.REACT_APP_API_URL;
   const navigate = useNavigate();
   const { empleado, setEmpleado } = React.useContext(UseContext);
 
@@ -104,7 +105,7 @@ function Empleados() {
 
   React.useEffect(() => {
     const getEmpleados = async () => {
-      const response = await axios.get("http://localhost:3900/empleoyee");
+      const response = await axios.get(apiUrl + "/empleoyee");
 
       if (response.status === 200) {
         const empleadoServ = response.data.emp;
@@ -117,33 +118,30 @@ function Empleados() {
   }, [loading]);
 
   const handleSubmitUpdate = async () => {
-    const response = await axios.put(
-      "http://localhost:3900/update/" + focus._id,
-      {
-        name: nameRef.current.value,
-        lastName: lastNameRef.current.value,
-        document: documentRef.current.value,
-        birthDate: birthRef.current.value,
-        address: addRef.current.value,
-        country: countryRef.current.value,
-        region: regionRef.current.value,
-        city: cityRef.current.value,
-        position: positionRef.current.value,
-        startDate: startRef.current.value,
-        endDate: endRef.current.value,
-        contract: contractRef.current.value,
-        endContract: endConRef.current?.value || "No aplica",
-        salary: salaryRef.current.value,
-        isWorking: workingRef.current.checked,
-        email: emailRef.current.value,
-      }
-    );
+    const response = await axios.put(apiUrl + "/update/" + focus._id, {
+      name: nameRef.current.value,
+      lastName: lastNameRef.current.value,
+      document: documentRef.current.value,
+      birthDate: birthRef.current.value,
+      address: addRef.current.value,
+      country: countryRef.current.value,
+      region: regionRef.current.value,
+      city: cityRef.current.value,
+      position: positionRef.current.value,
+      startDate: startRef.current.value,
+      endDate: endRef.current.value,
+      contract: contractRef.current.value,
+      endContract: endConRef.current?.value || "No aplica",
+      salary: salaryRef.current.value,
+      isWorking: workingRef.current.checked,
+      email: emailRef.current.value,
+    });
     setLoading(true);
     onCloseUpdate();
   };
 
   const handleSubmitNew = async () => {
-    const response = await axios.post("http://localhost:3900/save/", {
+    const response = await axios.post(apiUrl + "/save/", {
       name: nameRef.current.value,
       lastName: lastNameRef.current.value,
       document: parseInt(documentRef.current.value),
@@ -167,9 +165,7 @@ function Empleados() {
   };
 
   const handleDelete = async () => {
-    const response = await axios.delete(
-      "http://localhost:3900/delete/" + focus._id
-    );
+    const response = await axios.delete(apiUrl + "/delete/" + focus._id);
     setLoading(true);
     onCloseDelete();
   };

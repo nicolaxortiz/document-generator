@@ -35,6 +35,7 @@ import { useNavigate } from "react-router-dom";
 import { UseContext } from "../Context/UseContext";
 
 function Evaluations() {
+  const apiUrl = process.env.REACT_APP_API_URL;
   const navigate = useNavigate();
   const { empleado, setEmpleado } = React.useContext(UseContext);
   const [searchDocument, setSearchDocument] = React.useState();
@@ -102,9 +103,7 @@ function Evaluations() {
   //useEfect para obtener las nominas
   React.useEffect(() => {
     const getEvaluations = async () => {
-      const response = await axios.get(
-        "http://localhost:3900/evaluation/getAll"
-      );
+      const response = await axios.get(apiUrl + "/evaluation/getAll");
 
       if (response.status === 200) {
         const evaluationServ = response.data.eva;
@@ -118,7 +117,7 @@ function Evaluations() {
 
   //Funciones encargadas de la logica del componente
   const getEmpleados = async () => {
-    const response = await axios.get("http://localhost:3900/empleoyee/");
+    const response = await axios.get(apiUrl + "/empleoyee/");
 
     if (response.status === 200) {
       const employeeServ = response.data.emp;
@@ -128,7 +127,7 @@ function Evaluations() {
 
   const handleSubmitUpdate = async () => {
     const response = await axios.put(
-      "http://localhost:3900/evaluation/update/" + focus._id,
+      apiUrl + "/evaluation/update/" + focus._id,
       {
         date: dateRef.current.value,
         comment: commentRef.current.value,
@@ -147,32 +146,29 @@ function Evaluations() {
   };
 
   const handleSubmitNew = async () => {
-    const response = await axios.post(
-      "http://localhost:3900/evaluation/save/",
-      {
-        user_id: searchDocument,
-        date: dateRef.current.value,
-        evaluatorName: evaluatorNameRef.current.value,
-        evaluatorPosition: evaluatorPositionRef.current.value,
-        evaluatorDocument: evaluatorDocRef.current.value,
-        comment: commentRef.current.value,
-        topics: {
-          communication: { value: comRef.current.value },
-          teamWork: { value: teamRef.current.value },
-          problemSolving: { value: problemRef.current.value },
-          productivity: { value: proRef.current.value },
-          punctuality: { value: punctRef.current.value },
-          quality: { value: qualityRef.current.value },
-        },
-      }
-    );
+    const response = await axios.post(apiUrl + "/evaluation/save/", {
+      user_id: searchDocument,
+      date: dateRef.current.value,
+      evaluatorName: evaluatorNameRef.current.value,
+      evaluatorPosition: evaluatorPositionRef.current.value,
+      evaluatorDocument: evaluatorDocRef.current.value,
+      comment: commentRef.current.value,
+      topics: {
+        communication: { value: comRef.current.value },
+        teamWork: { value: teamRef.current.value },
+        problemSolving: { value: problemRef.current.value },
+        productivity: { value: proRef.current.value },
+        punctuality: { value: punctRef.current.value },
+        quality: { value: qualityRef.current.value },
+      },
+    });
     setLoading(true);
     onCloseUpdate();
   };
 
   const handleDelete = async () => {
     const response = await axios.delete(
-      "http://localhost:3900/evaluation/delete/" + focus._id
+      apiUrl + "/evaluation/delete/" + focus._id
     );
     setLoading(true);
     onCloseDelete();

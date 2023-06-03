@@ -26,6 +26,7 @@ import Main from "../Components/Main";
 import Footer from "../Components/Footer";
 
 function UpdatePassword() {
+  const apiUrl = process.env.REACT_APP_API_URL;
   const { setEmpleado, empleado } = React.useContext(UseContext);
   const [login, setLogin] = React.useState(false);
   const oldPasswordInput = React.useRef(null);
@@ -60,7 +61,7 @@ function UpdatePassword() {
     if (!!oldPassword && !!newPassword) {
       try {
         const response = await axios.put(
-          "http://localhost:3900/updatePass/" + empleado?._id,
+          apiUrl + "/updatePass/" + empleado?._id,
           {
             oldPassword,
             newPassword,

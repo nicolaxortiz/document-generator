@@ -22,6 +22,7 @@ import {
 } from "@chakra-ui/react";
 
 function ForgotPassword() {
+  const apiUrl = process.env.REACT_APP_API_URL;
   const [login, setLogin] = React.useState(false);
   const documentRef = React.useRef(null);
   const birthRef = React.useRef(null);
@@ -40,7 +41,7 @@ function ForgotPassword() {
     const document = documentRef.current.value;
     try {
       if (!!document) {
-        const response = await axios.post("http://localhost:3900/document/", {
+        const response = await axios.post(apiUrl + "/document/", {
           document: documentRef.current.value,
           birthDate: birthRef.current.value,
           email: emailRef.current.value,

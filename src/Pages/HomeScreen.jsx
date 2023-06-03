@@ -16,6 +16,7 @@ import welcomeImg from "../Resources/welcome-img.png";
 import { useNavigate } from "react-router-dom";
 
 function HomeScreen() {
+  const apiUrl = process.env.REACT_APP_API_URL;
   const { empleado, setEmpleado } = React.useContext(UseContext);
   const navigate = useNavigate();
 
@@ -34,9 +35,7 @@ function HomeScreen() {
 
   const generarCert = async () => {
     try {
-      const response = await axios.get(
-        "http://localhost:3900/certificado/" + empleado._id
-      );
+      const response = await axios.get(apiUrl + "/certificado/" + empleado._id);
 
       if (response.status === 200) {
         window.open(response.config.url, "_blank");
@@ -49,7 +48,7 @@ function HomeScreen() {
   const generarNom = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:3900/payroll/nomina/" + empleado._id
+        apiUrl + "/payroll/nomina/" + empleado._id
       );
       if (response.status === 200) {
         window.open(response.config.url, "_blank");
@@ -62,7 +61,7 @@ function HomeScreen() {
   const generarLayoffs = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:3900/layoffs/pazysalvo/" + empleado._id
+        apiUrl + "/layoffs/pazysalvo/" + empleado._id
       );
       if (response.status === 200) {
         window.open(response.config.url, "_blank");
@@ -82,7 +81,7 @@ function HomeScreen() {
 
     try {
       const response = await axios.get(
-        "http://localhost:3900/contract/" + contractType + "/" + empleado._id
+        apiUrl + "/contract/" + contractType + "/" + empleado._id
       );
       if (response.status === 200) {
         window.open(response.config.url, "_blank");
@@ -94,9 +93,7 @@ function HomeScreen() {
 
   const generarEvaluation = async () => {
     try {
-      const response = await axios.get(
-        "http://localhost:3900/evaluation/" + empleado._id
-      );
+      const response = await axios.get(apiUrl + "/evaluation/" + empleado._id);
       if (response.status === 200) {
         window.open(response.config.url, "_blank");
       }

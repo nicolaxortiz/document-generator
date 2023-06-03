@@ -34,6 +34,7 @@ import { useNavigate } from "react-router-dom";
 import { UseContext } from "../Context/UseContext";
 
 function Nominas() {
+  const apiUrl = process.env.REACT_APP_API_URL;
   const navigate = useNavigate();
   const { empleado, setEmpleado } = React.useContext(UseContext);
   const [searchDocument, setSearchDocument] = React.useState();
@@ -97,7 +98,7 @@ function Nominas() {
   //useEfect para obtener las nominas
   React.useEffect(() => {
     const getNominas = async () => {
-      const response = await axios.get("http://localhost:3900/payroll/getAll");
+      const response = await axios.get(apiUrl + "/payroll/getAll");
 
       if (response.status === 200) {
         const nominaServ = response.data.nom;
@@ -111,7 +112,7 @@ function Nominas() {
 
   //Funciones encargadas de la logica del componente
   const getEmpleados = async () => {
-    const response = await axios.get("http://localhost:3900/empleoyee/");
+    const response = await axios.get(apiUrl + "/empleoyee/");
 
     if (response.status === 200) {
       const employeeServ = response.data.emp;
@@ -120,7 +121,7 @@ function Nominas() {
   };
 
   const getEmpleadobyId = async (Eid) => {
-    const response = await axios.get("http://localhost:3900/empleoyee/" + Eid);
+    const response = await axios.get(apiUrl + "/empleoyee/" + Eid);
 
     if (response.status === 200) {
       const employeeServ = response.data.empleoyee;
@@ -129,35 +130,32 @@ function Nominas() {
   };
 
   const handleSubmitUpdate = async () => {
-    const response = await axios.put(
-      "http://localhost:3900/payroll/update/" + focus._id,
-      {
-        date: dateRef.current.value,
-        moves: {
-          salary: {
-            value: salaryValueRef.current.value,
-          },
-          transportation: {
-            value: transValueRef.current.value,
-          },
-          commissions: {
-            value: commValueRef.current.value,
-          },
-          health: {
-            value: healthValueRef.current.value,
-          },
-          pension: {
-            value: penValueRef.current.value,
-          },
+    const response = await axios.put(apiUrl + "/payroll/update/" + focus._id, {
+      date: dateRef.current.value,
+      moves: {
+        salary: {
+          value: salaryValueRef.current.value,
         },
-      }
-    );
+        transportation: {
+          value: transValueRef.current.value,
+        },
+        commissions: {
+          value: commValueRef.current.value,
+        },
+        health: {
+          value: healthValueRef.current.value,
+        },
+        pension: {
+          value: penValueRef.current.value,
+        },
+      },
+    });
     setLoading(true);
     onCloseUpdate();
   };
 
   const handleSubmitNew = async () => {
-    const response = await axios.post("http://localhost:3900/payroll/save/", {
+    const response = await axios.post(apiUrl + "/payroll/save/", {
       date: dateRef.current.value,
       user_id: searchDocument,
       moves: {
@@ -184,7 +182,7 @@ function Nominas() {
 
   const handleDelete = async () => {
     const response = await axios.delete(
-      "http://localhost:3900/payroll/delete/" + focus._id
+      apiUrl + "/payroll/delete/" + focus._id
     );
     setLoading(true);
     onCloseDelete();
