@@ -1,0 +1,26 @@
+.boxDocument {
+    width: 500px;
+    margin: 10px auto;
+    background-color:  #CCDCE9;
+    padding: 25px 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.txtDocument{
+    width: 100%;
+    border: #494F88 3px solid;
+    border-radius: 10px;
+    height: 35px;
+    padding: 0 8px;
+}
+
+.btnSearch{
+    margin-top: 20px;
+}
+
+.btnGenerate{
+    margin-top: 20px;
+}

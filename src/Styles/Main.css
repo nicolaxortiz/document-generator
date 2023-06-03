@@ -1,0 +1,218 @@
+/* Estilos para pantallas más pequeñas */
+@media (max-width: 570px) {
+    .loginBox{
+        background-color: #ffffff;
+        padding: 35px 35px;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0px 0px 57px -6px rgba(0, 0, 0, 0.13);
+        border-radius: 5px;
+        width: 80%;
+        margin: 20px auto;
+    }
+    .welcomeText{
+        font-size: 40px;
+        font-weight: 600;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+    .welcomeImg{
+        display: none;
+    }
+
+    .errorMessage{
+        font-size: 18px;
+        text-align: center;
+        margin-top: 30px;
+        font-weight: bold;
+        margin: 30px 30px 30px 30px;
+    }
+
+    .errorQuestion{
+        font-weight: bold;
+        font-size: 18px;
+        margin: 30px 30px 0 30px;
+    }
+
+    .errorInformation{
+        margin: 5px 30px 0 30px;
+    }
+  }
+  
+  /* Estilos para pantallas medianas */
+  @media (min-width: 571px) and (max-width: 1023px) {
+    .loginBox{
+        background-color: #ffffff;
+        padding: 50px 50px;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0px 0px 57px -6px rgba(0, 0, 0, 0.13);
+        border-radius: 5px;
+        width: 450px;
+        margin: 50px auto;
+    }
+    .welcomeText{
+        font-size: 40px;
+        font-weight: 600;
+        text-align: center;
+    }
+    .welcomeImg{
+        width: 280px;
+    }
+
+    .errorMessage{
+        font-size: 25px;
+        text-align: center;
+        margin-top: 60px;
+        font-weight: bold;
+        margin: 60px 30px 60px 30px;
+    }
+
+    .errorQuestion{
+        font-weight: bold;
+        font-size: 20px;
+        margin: 30px 60px 0 60px;
+    }
+
+    .errorInformation{
+        margin: 5px 60px 0 60px;
+    }
+  }
+  
+  /* Estilos para pantallas grandes */
+  @media (min-width: 1024px) {
+    .loginBox{
+        background-color: #ffffff;
+        padding: 50px 50px;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0px 0px 57px -6px rgba(0, 0, 0, 0.13);
+        border-radius: 5px;
+        width: 450px;
+        margin: 70px auto;
+    }
+    .welcomeText{
+        font-size: 50px;
+        font-weight: 600;
+        text-align: center;
+    }
+    .welcomeImg{
+        width: 320px;
+    }
+    .errorMessage{
+        font-size: 35px;
+        text-align: center;
+        margin-top: 80px;
+        font-weight: bold;
+        margin: 90px 30px 90px 30px;
+    }
+
+    .errorQuestion{
+        font-weight: bold;
+        font-size: 27px;
+        margin: 30px 90px 0 90px;
+        text-align: center;
+    }
+
+    .errorInformation{
+        font-size: 21px;
+        margin: 5px 90px 0 90px;
+        text-align: center;
+    }
+  }
+
+
+.main{
+    background-color: #E2EAF3;
+    padding: 50px 0;
+    padding-bottom: 50px;
+}
+
+.presentationText{
+    font-size: 25px;
+    margin: 0 auto;
+    color: white;
+    padding: 5px 7%;
+    text-align: center;
+    margin-bottom: 15px;
+    background-color: #494F88;
+    font-weight: 500;
+}
+
+.paraghraphText{
+    font-size: 20px;
+    padding: 0 7% ;
+    margin-bottom: 15px;
+}
+
+.divider{
+    width: 100%;
+    height: 5px;
+    background-color: #acb2e6;
+}
+
+.boxEmpleados{
+   margin: 0 auto;
+}
+
+.inpCorreo , .inpPass{
+    background-color: #ebebeb;
+    border-radius: 5px;
+    height: 32px;
+    margin-bottom: 20px;
+    padding-left: 2%;
+}
+
+.label{
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.borderLabel{
+    font-weight: bolder;
+}
+
+.titlePassword{
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.msgForgot{
+    font-size: 12px;
+    color: #494F88;
+    align-self: flex-end;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+.btnLogin{
+    background-color: #494F88;
+    border-radius: 5px;
+    color: #fff;
+    padding: 5px 0;
+    transition: all ease-in 0.3s;
+}
+
+.btnLogin:hover{
+    background-color: #1F255E;
+    transition: all ease-in 0.3s;
+}
+
+.errorImg{
+    display: block;
+    margin: 0 auto;
+    animation: moveImage 4s ease-in infinite;
+  }
+
+  @keyframes moveImage {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(10px); /* Altura a la que quieres mover la imagen */
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }

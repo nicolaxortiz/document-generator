@@ -1,0 +1,81 @@
+/* Estilos para pantallas más pequeñas */
+@media (max-width: 570px) {
+    .navText{
+        display: none;
+    }
+  }
+  
+  /* Estilos para pantallas medianas */
+  @media (min-width: 571px) and (max-width: 1023px) {
+    
+  }
+  
+  /* Estilos para pantallas grandes */
+  @media (min-width: 1024px) {
+    
+  }
+
+
+/* Estos son del header nav */
+.header-nav {
+    background-color: #2F73FE;
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%
+}
+
+.col-1{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: #fff;
+    width: 100%;
+    margin-left: 5%;
+}
+
+.col-2{
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    justify-content: end;
+    margin-right: 5%;
+}
+
+
+
+.imgLetter, .imgPhone{
+    width: 25px;
+    margin-right: 4px;
+    user-select: none;
+}
+
+
+.imgPhone{
+    margin-left: 4%;
+}
+
+.imgUser{
+    width: 25px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.imgInfo{
+    width: 25px;
+    cursor: pointer;
+    margin-left: 20px;
+    user-select: none;
+}
+
+/* Estos son del Header */
+.header{
+    box-shadow: 0px -12px 45px -4px rgba(0, 0, 0, 0.123);
+    z-index: 1;
+    position: relative;
+}
+.imgLogo{
+    width: 200px;
+    margin-left: 4%;
+    padding: 20px 0;
+}

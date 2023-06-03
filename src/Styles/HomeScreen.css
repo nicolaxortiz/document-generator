@@ -1,0 +1,43 @@
+html{
+    background-color: #3b3a4b;
+}
+
+*{
+    font-family: 'Lato', sans-serif;
+    user-select: none;
+}
+
+.cajita-1 {
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    width: 200px;
+    height: 200px;
+    cursor: pointer;
+    transition: all ease 1s;
+    margin: 15px auto;
+}
+
+.cajita-1:hover {
+    box-shadow: 0px 0px 50px -17px rgba(0, 0, 0, 0.37);
+    transition: all ease 0.3s;
+}
+
+.titleBox{
+    font-weight: 700;
+}
+
+.subBox{
+    color: #777777;
+    font-size: 14px;
+}
+
+.imgCert {
+    width: 50px;
+    margin-bottom: 14px;
+    margin-left: 10px;
+}
+
+
+
+
