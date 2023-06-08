@@ -14,6 +14,7 @@ import UpdatePassword from "./Pages/UpdatePassword";
 import Evaluations from "./Pages/Evaluations";
 import NotFound from "./Pages/NotFound";
 import UpdatePersonal from "./Pages/UpdatePersonal";
+import ServerError from "./Pages/ServerError";
 
 const router = createBrowserRouter([
   {
@@ -59,6 +60,10 @@ const router = createBrowserRouter([
   {
     path: "/notFound",
     element: <NotFound />,
+  },
+  {
+    path: "/error",
+    element: <ServerError />,
   },
 ]);
 

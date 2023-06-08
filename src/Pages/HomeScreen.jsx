@@ -41,7 +41,13 @@ function HomeScreen() {
         window.open(response.config.url, "_blank");
       }
     } catch (error) {
-      navigate("/notFound");
+      if (error.response.status === 404) {
+        navigate("/notFound");
+      }
+
+      if (error.response.status === 500) {
+        navigate("/error");
+      }
     }
   };
 
@@ -54,7 +60,13 @@ function HomeScreen() {
         window.open(response.config.url, "_blank");
       }
     } catch (error) {
-      navigate("/notFound");
+      if (error.response.status === 404) {
+        navigate("/notFound");
+      }
+
+      if (error.response.status === 500) {
+        navigate("/error");
+      }
     }
   };
 
@@ -67,7 +79,13 @@ function HomeScreen() {
         window.open(response.config.url, "_blank");
       }
     } catch (error) {
-      navigate("/notFound");
+      if (error.response.status === 404) {
+        navigate("/notFound");
+      }
+
+      if (error.response.status === 500) {
+        navigate("/error");
+      }
     }
   };
 
@@ -98,7 +116,13 @@ function HomeScreen() {
         window.open(response.config.url, "_blank");
       }
     } catch (error) {
-      navigate("/notFound");
+      if (error.response.status === 404) {
+        navigate("/notFound");
+      }
+
+      if (error.response.status === 500) {
+        navigate("/error");
+      }
     }
   };
 
