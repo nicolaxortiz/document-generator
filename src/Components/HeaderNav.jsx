@@ -14,7 +14,6 @@ import {
 } from "@chakra-ui/react";
 import letter from "../Resources/letter.svg";
 import phone from "../Resources/phone.svg";
-import logout from "../Resources/logout.svg";
 import user from "../Resources/user-svg.svg";
 import info from "../Resources/information.svg";
 import { useNavigate } from "react-router-dom";
@@ -23,6 +22,18 @@ import { UseContext } from "../Context/UseContext";
 function HeaderNav() {
   const navigate = useNavigate();
   const { setEmpleado, empleado } = React.useContext(UseContext);
+
+  const handleInformation = () => {
+    if (empleado?.position === "admin") {
+      window.open(
+        "https://unidadestecno-my.sharepoint.com/:b:/g/personal/dlnovoa_uts_edu_co/EZYPx7I0fzNCq7u2DiyU2KcBvGnFEcc5LilURJNPmCNcTg?e=XaDMPu"
+      );
+    } else {
+      window.open(
+        "https://unidadestecno-my.sharepoint.com/:b:/g/personal/dlnovoa_uts_edu_co/EU4Pi1OCtaBBlt9-zKUsgcQBIkaj_5kWZskbKD0HUIag2g?e=MKvcaL"
+      );
+    }
+  };
   return (
     <>
       <div className="header-nav">
@@ -57,7 +68,7 @@ function HeaderNav() {
                   display="flex"
                 >
                   <SimpleGrid columns={2} spacing={4}>
-                    {empleado?.position != "admin" && (
+                    {empleado?.position !== "admin" && (
                       <>
                         <Button
                           colorScheme="facebook"
@@ -97,7 +108,7 @@ function HeaderNav() {
 
           <Popover placement="bottom" closeOnBlur={false}>
             <PopoverTrigger>
-              <img src={info} alt="" className="imgInfo" />
+              <img src={info} alt="info" className="imgInfo" />
             </PopoverTrigger>
             <PopoverContent
               color="#1F255E"
@@ -118,7 +129,9 @@ function HeaderNav() {
                 justifyContent="center"
                 display="flex"
               >
-                <Button colorScheme="facebook">Abrir manual</Button>
+                <Button colorScheme="facebook" onClick={handleInformation}>
+                  Abrir manual
+                </Button>
               </PopoverFooter>
             </PopoverContent>
           </Popover>

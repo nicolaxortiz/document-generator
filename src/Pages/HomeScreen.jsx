@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import "../Styles/HomeScreen.css";
-import { Grid, GridItem, Flex, Spacer } from "@chakra-ui/react";
+import { Grid, GridItem, Flex } from "@chakra-ui/react";
 import HeaderNav from "../Components/HeaderNav";
 import Header from "../Components/Header";
 import Main from "../Components/Main";
@@ -91,7 +91,7 @@ function HomeScreen() {
 
   const generarContract = async (type) => {
     let contractType;
-    if (type == "a término indefinido") {
+    if (type === "a término indefinido") {
       contractType = "indefinido";
     } else {
       contractType = "fijo";
@@ -132,7 +132,7 @@ function HomeScreen() {
       <Header />
       <Main>
         <Flex alignItems="center" justifyContent="space-evenly">
-          <img src={welcomeImg} className="welcomeImg" />
+          <img src={welcomeImg} alt="bienvenido" className="welcomeImg" />
           <p className="welcomeText">Bienvenido al portal de documentación</p>
         </Flex>
         <div className="presentationText">
