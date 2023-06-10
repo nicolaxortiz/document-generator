@@ -42,12 +42,15 @@
     margin-right: 5%;
 }
 
-
+.navText{
+    cursor: pointer;
+}
 
 .imgLetter, .imgPhone{
     width: 25px;
     margin-right: 4px;
     user-select: none;
+    cursor: pointer;
 }
 
 

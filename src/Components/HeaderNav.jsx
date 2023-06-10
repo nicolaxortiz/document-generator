@@ -25,21 +25,31 @@ function HeaderNav() {
 
   const handleInformation = () => {
     if (empleado?.position === "admin") {
-      window.open(
-        "https://unidadestecno-my.sharepoint.com/:b:/g/personal/dlnovoa_uts_edu_co/EZYPx7I0fzNCq7u2DiyU2KcBvGnFEcc5LilURJNPmCNcTg?e=XaDMPu"
-      );
+      window.open("https://1drv.ms/b/s!AvPWSBIqayJEa4D--4jHxI-9Etc?e=D9ZQoo");
     } else {
-      window.open(
-        "https://unidadestecno-my.sharepoint.com/:b:/g/personal/dlnovoa_uts_edu_co/EU4Pi1OCtaBBlt9-zKUsgcQBIkaj_5kWZskbKD0HUIag2g?e=MKvcaL"
-      );
+      window.open("https://1drv.ms/b/s!AvPWSBIqayJEagcPd52TRbXhd84?e=v9cEQ0");
     }
+  };
+
+  const handleEmail = () => {
+    const mailtoUrl = `mailto:empresaejemplo01@outlook.com?subject=${encodeURIComponent(
+      "Solicitud de soporte"
+    )}`;
+    window.location.href = mailtoUrl;
   };
   return (
     <>
       <div className="header-nav">
         <div className="col-1">
-          <img src={letter} alt="Carta" className="imgLetter" />
-          <p className="navText">contactosoporte@gmail.com</p>
+          <img
+            src={letter}
+            alt="Carta"
+            className="imgLetter"
+            onClick={handleEmail}
+          />
+          <p className="navText" onClick={handleEmail}>
+            empresaejemplo01@outlook.com
+          </p>
           <img src={phone} alt="Telefono" className="imgPhone" />
           <p className="navText"> +57 3187656743</p>
         </div>
