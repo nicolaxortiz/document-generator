@@ -55,6 +55,7 @@ function UpdatePassword() {
   }, []);
 
   const handleChange = async () => {
+    onClose();
     const oldPassword = oldPasswordInput.current.value;
     const newPassword = newPasswordInput.current.value;
 

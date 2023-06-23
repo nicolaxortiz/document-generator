@@ -35,6 +35,7 @@ function Login() {
   }, [empleado]);
 
   const handleLogin = async () => {
+    onClose();
     const email = emailInput.current.value;
     const password = passwordInput.current.value;
 

@@ -38,6 +38,7 @@ function ForgotPassword() {
   } = useDisclosure();
 
   const handleLogin = async () => {
+    onClose();
     const document = documentRef.current.value;
     try {
       if (!!document) {

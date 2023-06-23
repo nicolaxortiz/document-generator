@@ -63,6 +63,7 @@ function UpdatePersonal() {
   const emailRef = React.useRef();
 
   const handleChange = async () => {
+    onClose();
     const name = nameRef.current.value;
     const lastName = lastNameRef.current.value;
     const document = documentRef.current.value;

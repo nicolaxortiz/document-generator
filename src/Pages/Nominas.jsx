@@ -177,7 +177,7 @@ function Nominas() {
       },
     });
     setLoading(true);
-    onCloseUpdate();
+    onCloseNew();
   };
 
   const handleDelete = async () => {
