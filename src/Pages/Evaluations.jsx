@@ -125,33 +125,17 @@ function Evaluations() {
     }
   };
 
-  const handleSubmitUpdate = async () => {
-    const response = await axios.put(
-      apiUrl + "/evaluation/update/" + focus._id,
-      {
-        date: dateRef.current.value,
-        comment: commentRef.current.value,
-        topics: {
-          communication: { value: comRef.current.value },
-          teamWork: { value: teamRef.current.value },
-          problemSolving: { value: problemRef.current.value },
-          productivity: { value: proRef.current.value },
-          punctuality: { value: punctRef.current.value },
-          quality: { value: qualityRef.current.value },
-        },
-      }
-    );
-    setLoading(true);
-    onCloseUpdate();
+  const objetoContieneValorVacio = (objeto) => {
+    return Object.values(objeto).some((valor) => {
+      return valor === undefined || valor === null || valor === "";
+    });
   };
 
-  const handleSubmitNew = async () => {
-    const response = await axios.post(apiUrl + "/evaluation/save/", {
-      user_id: searchDocument,
-      date: dateRef.current.value,
-      evaluatorName: evaluatorNameRef.current.value,
-      evaluatorPosition: evaluatorPositionRef.current.value,
-      evaluatorDocument: evaluatorDocRef.current.value,
+  const handleSubmitUpdate = async () => {
+    let date = dateRef.current.value.split("-").reverse();
+
+    let data = {
+      date: date.length === 1 ? "" : date[0] + "/" + date[1] + "/" + date[2],
       comment: commentRef.current.value,
       topics: {
         communication: { value: comRef.current.value },
@@ -161,9 +145,47 @@ function Evaluations() {
         punctuality: { value: punctRef.current.value },
         quality: { value: qualityRef.current.value },
       },
-    });
-    setLoading(true);
-    onCloseUpdate();
+    };
+
+    if (!objetoContieneValorVacio(data)) {
+      const response = await axios.put(
+        apiUrl + "/evaluation/update/" + focus._id,
+        data
+      );
+      setLoading(true);
+      onCloseUpdate();
+    } else {
+      console.log("Hay datos vacios");
+    }
+  };
+
+  const handleSubmitNew = async () => {
+    let date = dateRef.current.value.split("-").reverse();
+
+    let data = {
+      user_id: searchDocument,
+      date: date.length === 1 ? "" : date[0] + "/" + date[1] + "/" + date[2],
+      evaluatorName: evaluatorNameRef.current.value,
+      evaluatorPosition: evaluatorPositionRef.current.value,
+      evaluatorDocument: parseInt(evaluatorDocRef.current.value),
+      comment: commentRef.current.value,
+      topics: {
+        communication: { value: comRef.current.value },
+        teamWork: { value: teamRef.current.value },
+        problemSolving: { value: problemRef.current.value },
+        productivity: { value: proRef.current.value },
+        punctuality: { value: punctRef.current.value },
+        quality: { value: qualityRef.current.value },
+      },
+    };
+
+    if (!objetoContieneValorVacio(data)) {
+      const response = await axios.post(apiUrl + "/evaluation/save/", data);
+      setLoading(true);
+      onCloseNew();
+    } else {
+      console.log("Hay datos vacios");
+    }
   };
 
   const handleDelete = async () => {
@@ -409,7 +431,11 @@ function Evaluations() {
                   <FormLabel fontWeight={"bold"}>
                     Fecha de la evaluación
                   </FormLabel>
-                  <Input defaultValue={focus?.date} ref={dateRef} />
+                  <Input
+                    defaultValue={focus?.date.split("/").reverse().join("-")}
+                    ref={dateRef}
+                    type="date"
+                  />
                 </FormControl>
 
                 <FormControl mt={4}>
@@ -533,7 +559,7 @@ function Evaluations() {
                   <FormLabel fontWeight={"bold"}>
                     Documento del evaluador
                   </FormLabel>
-                  <Input ref={evaluatorDocRef} />
+                  <Input ref={evaluatorDocRef} type="number" />
                 </FormControl>
 
                 <FormControl mt={4}>
@@ -547,7 +573,7 @@ function Evaluations() {
                   <FormLabel fontWeight={"bold"}>
                     Fecha de la evaluación
                   </FormLabel>
-                  <Input placeholder="dd/mm/aaaa" ref={dateRef} />
+                  <Input ref={dateRef} type="date" />
                 </FormControl>
 
                 <FormControl mt={4}>

@@ -39,12 +39,15 @@ function ForgotPassword() {
 
   const handleLogin = async () => {
     onClose();
-    const document = documentRef.current.value;
+    let document = documentRef.current.value;
+    let birthDate = birthRef.current.value;
+    const [año, mes, dia] = birthDate.split("-");
+
     try {
       if (!!document) {
         const response = await axios.post(apiUrl + "/document/", {
           document: documentRef.current.value,
-          birthDate: birthRef.current.value,
+          birthDate: dia + "/" + mes + "/" + año,
           email: emailRef.current.value,
         });
         if (response.status === 200) {
@@ -87,7 +90,7 @@ function ForgotPassword() {
 
           <label className="label">Fecha de nacimiento:</label>
           <input
-            type="text"
+            type="date"
             className="inpCorreo"
             ref={birthRef}
             placeholder="dd/mm/aaaa"

@@ -129,9 +129,16 @@ function Nominas() {
     }
   };
 
+  const objetoContieneValorVacio = (objeto) => {
+    return Object.values(objeto).some((valor) => {
+      return valor === undefined || valor === null || valor === "";
+    });
+  };
+
   const handleSubmitUpdate = async () => {
+    let [year, month, day] = dateRef.current.value.split("-");
     const response = await axios.put(apiUrl + "/payroll/update/" + focus._id, {
-      date: dateRef.current.value,
+      date: day + "/" + month + "/" + year,
       moves: {
         salary: {
           value: salaryValueRef.current.value,
@@ -155,8 +162,10 @@ function Nominas() {
   };
 
   const handleSubmitNew = async () => {
-    const response = await axios.post(apiUrl + "/payroll/save/", {
-      date: dateRef.current.value,
+    let date = dateRef.current.value.split("-").reverse();
+
+    let data = {
+      date: date.length === 1 ? "" : date[0] + "/" + date[1] + "/" + date[2],
       user_id: searchDocument,
       moves: {
         salary: {
@@ -175,9 +184,15 @@ function Nominas() {
           value: penValueRef.current.value,
         },
       },
-    });
-    setLoading(true);
-    onCloseNew();
+    };
+
+    if (!objetoContieneValorVacio(data)) {
+      const response = await axios.post(apiUrl + "/payroll/save/", data);
+      setLoading(true);
+      onCloseNew();
+    } else {
+      console.log("Hay datos vacios");
+    }
   };
 
   const handleDelete = async () => {
@@ -217,6 +232,7 @@ function Nominas() {
                     getEmpleados();
                   }
                   onOpenNew();
+                  setSelectEmployee();
                 }}
                 mr={"20px"}
               >
@@ -393,7 +409,11 @@ function Nominas() {
 
                 <FormControl mt={4}>
                   <FormLabel fontWeight={"bold"}>Fecha nomina</FormLabel>
-                  <Input defaultValue={focus?.date} ref={dateRef} />
+                  <Input
+                    defaultValue={focus?.date.split("/").reverse().join("-")}
+                    type="date"
+                    ref={dateRef}
+                  />
                 </FormControl>
 
                 <FormControl mt={4}>
@@ -505,7 +525,7 @@ function Nominas() {
 
                 <FormControl mt={4}>
                   <FormLabel fontWeight={"bold"}>Fecha nomina</FormLabel>
-                  <Input ref={dateRef} />
+                  <Input ref={dateRef} type="date" />
                 </FormControl>
 
                 <FormControl mt={4}>

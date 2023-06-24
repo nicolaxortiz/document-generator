@@ -98,7 +98,6 @@ function Empleados() {
   const startRef = React.useRef();
   const endRef = React.useRef();
   const contractRef = React.useRef();
-  const endConRef = React.useRef();
   const salaryRef = React.useRef();
   const workingRef = React.useRef();
   const emailRef = React.useRef();
@@ -117,51 +116,99 @@ function Empleados() {
     getEmpleados();
   }, [loading]);
 
+  const objetoContieneValorVacio = (objeto) => {
+    return Object.values(objeto).some((valor) => {
+      return valor === undefined || valor === null || valor === "";
+    });
+  };
+
   const handleSubmitUpdate = async () => {
-    const response = await axios.put(apiUrl + "/update/" + focus._id, {
+    let birthDate = birthRef.current.value.split("-").reverse();
+    let startDate = startRef.current.value.split("-").reverse();
+    let endDate = endRef.current.value.split("-").reverse();
+
+    let data = {
       name: nameRef.current.value,
       lastName: lastNameRef.current.value,
       document: documentRef.current.value,
-      birthDate: birthRef.current.value,
+      birthDate:
+        birthDate.length === 1
+          ? undefined
+          : birthDate[0] + "/" + birthDate[1] + "/" + birthDate[2],
       address: addRef.current.value,
       country: countryRef.current.value,
       region: regionRef.current.value,
       city: cityRef.current.value,
       position: positionRef.current.value,
-      startDate: startRef.current.value,
-      endDate: endRef.current.value,
+      startDate:
+        startDate.length === 1
+          ? undefined
+          : startDate[0] + "/" + startDate[1] + "/" + startDate[2],
       contract: contractRef.current.value,
-      endContract: endConRef.current?.value || "No aplica",
       salary: salaryRef.current.value,
       isWorking: workingRef.current.checked,
       email: emailRef.current.value,
-    });
-    setLoading(true);
-    onCloseUpdate();
+    };
+
+    if (!objetoContieneValorVacio(data)) {
+      data.endData =
+        endDate.length === 1
+          ? ""
+          : endDate[0] + "/" + endDate[1] + "/" + endDate[2];
+
+      data.endContract =
+        endDate.length === 1
+          ? "No aplica"
+          : endDate[0] + "/" + endDate[1] + "/" + endDate[2];
+
+      const response = await axios.put(apiUrl + "/update/" + focus._id, data);
+      setLoading(true);
+      onCloseUpdate();
+    } else {
+      console.log("Hay datos vacios");
+    }
   };
 
   const handleSubmitNew = async () => {
-    const response = await axios.post(apiUrl + "/save/", {
+    let birthDate = birthRef.current.value.split("-").reverse();
+    let startDate = startRef.current.value.split("-").reverse();
+    let endDate = endRef.current.value.split("-").reverse();
+
+    let data = {
       name: nameRef.current.value,
       lastName: lastNameRef.current.value,
       document: parseInt(documentRef.current.value),
-      birthDate: birthRef.current.value,
+      birthDate: birthDate[0] + "/" + birthDate[1] + "/" + birthDate[2],
       address: addRef.current.value,
       country: countryRef.current.value,
       region: regionRef.current.value,
       city: cityRef.current.value,
       position: positionRef.current.value,
-      startDate: startRef.current.value,
-      endDate: endRef.current.value,
+      startDate: startDate[0] + "/" + startDate[1] + "/" + startDate[2],
       contract: contractRef.current.value,
-      endContract: endConRef.current?.value || "No aplica",
       salary: parseInt(salaryRef.current.value),
       isWorking: workingRef.current.checked,
       email: emailRef.current.value,
       password: documentRef.current.value,
-    });
-    setLoading(true);
-    onCloseNew();
+    };
+
+    if (!objetoContieneValorVacio(data)) {
+      data.endData =
+        endDate.length === 1
+          ? ""
+          : endDate[0] + "/" + endDate[1] + "/" + endDate[2];
+
+      data.endContract =
+        endDate.length === 1
+          ? "No aplica"
+          : endDate[0] + "/" + endDate[1] + "/" + endDate[2];
+
+      const response = await axios.post(apiUrl + "/save/", data);
+      setLoading(true);
+      onCloseNew();
+    } else {
+      console.log("Hay datos vacios");
+    }
   };
 
   const handleDelete = async () => {
@@ -346,13 +393,6 @@ function Empleados() {
 
                     <FormControl mt={4}>
                       <FormLabel fontWeight={"bold"}>
-                        Finalizacion contrato
-                      </FormLabel>
-                      <p>{focus?.endContract}</p>
-                    </FormControl>
-
-                    <FormControl mt={4}>
-                      <FormLabel fontWeight={"bold"}>
                         Direción de domicilio
                       </FormLabel>
                       <p>{focus?.address}</p>
@@ -412,67 +452,78 @@ function Empleados() {
                 <SimpleGrid columns={2} spacing={5}>
                   <div>
                     <FormControl>
-                      <FormLabel fontWeight={"bold"}>Nombres</FormLabel>
+                      <FormLabel fontWeight={"bold"}>Nombres *</FormLabel>
                       <Input ref={nameRef} defaultValue={focus?.name} />
                     </FormControl>
 
                     <FormControl mt={4}>
-                      <FormLabel fontWeight={"bold"}>Apellidos</FormLabel>
+                      <FormLabel fontWeight={"bold"}>Apellidos *</FormLabel>
                       <Input ref={lastNameRef} defaultValue={focus?.lastName} />
                     </FormControl>
 
                     <FormControl mt={4}>
-                      <FormLabel fontWeight={"bold"}>N° de identidad</FormLabel>
+                      <FormLabel fontWeight={"bold"}>
+                        N° de identidad *
+                      </FormLabel>
                       <Input ref={documentRef} defaultValue={focus?.document} />
                     </FormControl>
 
                     <FormControl mt={4}>
                       <FormLabel fontWeight={"bold"}>
-                        Fecha de nacimiento
+                        Fecha de nacimiento *
                       </FormLabel>
-                      <Input ref={birthRef} defaultValue={focus?.birthDate} />
+                      <Input
+                        ref={birthRef}
+                        defaultValue={focus?.birthDate
+                          .split("/")
+                          .reverse()
+                          .join("-")}
+                        type="date"
+                      />
                     </FormControl>
 
                     <FormControl mt={4}>
                       <FormLabel fontWeight={"bold"}>
-                        Direción de domicilio
+                        Direción de domicilio *
                       </FormLabel>
                       <Input ref={addRef} defaultValue={focus?.address} />
                     </FormControl>
 
                     <FormControl mt={4}>
                       <FormLabel fontWeight={"bold"}>
-                        País de residencia
+                        País de residencia *
                       </FormLabel>
                       <Input ref={countryRef} defaultValue={focus?.country} />
                     </FormControl>
 
                     <FormControl mt={4}>
-                      <FormLabel fontWeight={"bold"}>Departamento</FormLabel>
+                      <FormLabel fontWeight={"bold"}>Departamento *</FormLabel>
                       <Input ref={regionRef} defaultValue={focus?.region} />
                     </FormControl>
 
                     <FormControl mt={4}>
-                      <FormLabel fontWeight={"bold"}>Ciudad</FormLabel>
+                      <FormLabel fontWeight={"bold"}>Ciudad *</FormLabel>
                       <Input ref={cityRef} defaultValue={focus?.city} />
                     </FormControl>
                   </div>
                   <div>
                     <FormControl>
-                      <FormLabel fontWeight={"bold"}>Cargo</FormLabel>
+                      <FormLabel fontWeight={"bold"}>Cargo *</FormLabel>
                       <Input ref={positionRef} defaultValue={focus?.position} />
                     </FormControl>
 
                     <FormControl mt={4}>
                       <FormLabel fontWeight={"bold"}>
-                        Tipo de contrato
+                        Tipo de contrato *
                       </FormLabel>
                       <Select
                         ref={contractRef}
                         defaultValue={focus?.contract}
                         onChange={handleChange}
                       >
-                        <option value="">Seleccione el tipo de contrato</option>
+                        <option value="">
+                          Seleccione el tipo de contrato *
+                        </option>
                         <option value="a término fijo">Termino fijo</option>
                         <option value="a término indefinido">
                           Termino indefinido
@@ -482,47 +533,50 @@ function Empleados() {
                       </Select>
                     </FormControl>
 
-                    {selectContract != "a término indefinido" && (
-                      <FormControl mt={4}>
-                        <FormLabel fontWeight={"bold"}>
-                          Finalizacion contrato
-                        </FormLabel>
-                        <Input
-                          ref={endConRef}
-                          defaultValue={focus?.endContract}
-                          placeholder="dd/mm/aaaa"
-                        />
-                      </FormControl>
-                    )}
-
                     <FormControl mt={4}>
                       <FormLabel fontWeight={"bold"}>
-                        Fecha inicio de labores
+                        Fecha inicio de labores *
                       </FormLabel>
-                      <Input ref={startRef} defaultValue={focus?.startDate} />
+                      <Input
+                        ref={startRef}
+                        defaultValue={focus?.startDate
+                          .split("/")
+                          .reverse()
+                          .join("-")}
+                        type="date"
+                      />
                     </FormControl>
 
                     <FormControl mt={4}>
                       <FormLabel fontWeight={"bold"}>
                         Fecha final de labores
                       </FormLabel>
-                      <Input ref={endRef} defaultValue={focus?.endDate} />
+                      <Input
+                        ref={endRef}
+                        defaultValue={focus?.endDate
+                          .split("/")
+                          .reverse()
+                          .join("-")}
+                        type="date"
+                      />
                     </FormControl>
 
                     <FormControl mt={4}>
-                      <FormLabel fontWeight={"bold"}>Salario</FormLabel>
+                      <FormLabel fontWeight={"bold"}>Salario *</FormLabel>
                       <Input ref={salaryRef} defaultValue={focus?.salary} />
                     </FormControl>
 
                     <FormControl mt={4}>
                       <FormLabel fontWeight={"bold"}>
-                        Correo electronico
+                        Correo electronico *
                       </FormLabel>
                       <Input ref={emailRef} defaultValue={focus?.email} />
                     </FormControl>
 
                     <FormControl display="flex" alignItems="center" mt={4}>
-                      <FormLabel mb="0">¿Trabaja Actualmente?</FormLabel>
+                      <FormLabel mb="0" fontWeight={"bold"}>
+                        ¿Trabaja Actualmente? *
+                      </FormLabel>
                       <Switch
                         id="email-alerts"
                         ref={workingRef}
@@ -566,60 +620,62 @@ function Empleados() {
                 <SimpleGrid spacing={5} columns={2}>
                   <div>
                     <FormControl>
-                      <FormLabel fontWeight={"bold"}>Nombres</FormLabel>
+                      <FormLabel fontWeight={"bold"}>Nombres *</FormLabel>
                       <Input ref={nameRef} />
                     </FormControl>
 
                     <FormControl mt={4}>
-                      <FormLabel fontWeight={"bold"}>Apellidos</FormLabel>
+                      <FormLabel fontWeight={"bold"}>Apellidos *</FormLabel>
                       <Input ref={lastNameRef} />
                     </FormControl>
 
                     <FormControl mt={4}>
-                      <FormLabel fontWeight={"bold"}>N° de identidad</FormLabel>
+                      <FormLabel fontWeight={"bold"}>
+                        N° de identidad *
+                      </FormLabel>
                       <Input ref={documentRef} type="number" />
                     </FormControl>
 
                     <FormControl mt={4}>
                       <FormLabel fontWeight={"bold"}>
-                        Fecha de nacimiento
+                        Fecha de nacimiento *
                       </FormLabel>
-                      <Input ref={birthRef} placeholder="dd/mm/aaaa" />
+                      <Input ref={birthRef} type="date" />
                     </FormControl>
 
                     <FormControl mt={4}>
                       <FormLabel fontWeight={"bold"}>
-                        Direción de domicilio
+                        Direción de domicilio *
                       </FormLabel>
                       <Input ref={addRef} />
                     </FormControl>
 
                     <FormControl mt={4}>
                       <FormLabel fontWeight={"bold"}>
-                        País de residencia
+                        País de residencia *
                       </FormLabel>
                       <Input ref={countryRef} />
                     </FormControl>
 
                     <FormControl mt={4}>
-                      <FormLabel fontWeight={"bold"}>Departamento</FormLabel>
+                      <FormLabel fontWeight={"bold"}>Departamento *</FormLabel>
                       <Input ref={regionRef} />
                     </FormControl>
 
                     <FormControl mt={4}>
-                      <FormLabel fontWeight={"bold"}>Ciudad</FormLabel>
+                      <FormLabel fontWeight={"bold"}>Ciudad *</FormLabel>
                       <Input ref={cityRef} />
                     </FormControl>
                   </div>
                   <div>
                     <FormControl>
-                      <FormLabel fontWeight={"bold"}>Cargo</FormLabel>
+                      <FormLabel fontWeight={"bold"}>Cargo *</FormLabel>
                       <Input ref={positionRef} />
                     </FormControl>
 
                     <FormControl mt={4}>
                       <FormLabel fontWeight={"bold"}>
-                        Tipo de contrato
+                        Tipo de contrato *
                       </FormLabel>
                       <Select ref={contractRef} onChange={handleChange}>
                         <option value="">Seleccione el tipo de contrato</option>
@@ -632,43 +688,34 @@ function Empleados() {
                       </Select>
                     </FormControl>
 
-                    {selectContract != "a término indefinido" && (
-                      <FormControl mt={4}>
-                        <FormLabel fontWeight={"bold"}>
-                          Finalizacion contrato
-                        </FormLabel>
-                        <Input ref={endConRef} placeholder="dd/mm/aaaa" />
-                      </FormControl>
-                    )}
-
                     <FormControl mt={4}>
                       <FormLabel fontWeight={"bold"}>
-                        Fecha inicio de labores
+                        Fecha inicio de labores *
                       </FormLabel>
-                      <Input ref={startRef} placeholder="dd/mm/aaaa" />
+                      <Input ref={startRef} type="date" />
                     </FormControl>
 
                     <FormControl mt={4}>
                       <FormLabel fontWeight={"bold"}>
                         Fecha final de labores
                       </FormLabel>
-                      <Input ref={endRef} placeholder="dd/mm/aaaa" />
+                      <Input ref={endRef} type="date" />
                     </FormControl>
 
                     <FormControl mt={4}>
-                      <FormLabel fontWeight={"bold"}>Salario</FormLabel>
+                      <FormLabel fontWeight={"bold"}>Salario *</FormLabel>
                       <Input ref={salaryRef} type="number" />
                     </FormControl>
 
                     <FormControl mt={4}>
                       <FormLabel fontWeight={"bold"}>
-                        Correo electronico
+                        Correo electronico *
                       </FormLabel>
                       <Input ref={emailRef} />
                     </FormControl>
 
                     <FormControl display="flex" alignItems="center" mt={4}>
-                      <FormLabel mb="0">¿Trabaja Actualmente?</FormLabel>
+                      <FormLabel mb="0">¿Trabaja Actualmente? *</FormLabel>
                       <Switch
                         id="work-alerts"
                         ref={workingRef}

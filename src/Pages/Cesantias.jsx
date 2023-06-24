@@ -166,25 +166,52 @@ function Cesantias() {
     }
   };
 
-  const handleSubmitUpdate = async () => {
-    const response = await axios.put(apiUrl + "/layoffs/update/" + focus._id, {
-      isSaved: savedRef.current.checked,
-      startDate: dateRef.current.value,
-      quantity: parseInt(quantityRef.current.value),
+  const objetoContieneValorVacio = (objeto) => {
+    return Object.values(objeto).some((valor) => {
+      return valor === undefined || valor === null || valor === "";
     });
-    setLoading(true);
-    onCloseUpdate();
+  };
+
+  const handleSubmitUpdate = async () => {
+    let date = dateRef.current.value.split("-").reverse();
+
+    let data = {
+      isSaved: savedRef.current.checked,
+      startDate:
+        date.length === 1 ? "" : date[0] + "/" + date[1] + "/" + date[2],
+      quantity: parseInt(quantityRef.current.value),
+    };
+
+    if (!objetoContieneValorVacio(data)) {
+      const response = await axios.put(
+        apiUrl + "/layoffs/update/" + focus._id,
+        data
+      );
+      setLoading(true);
+      onCloseUpdate();
+    } else {
+      console.log("Hay datos vacios");
+    }
   };
 
   const handleSubmitNew = async () => {
-    const response = await axios.post(apiUrl + "/layoffs/save/", {
+    let date = dateRef.current.value.split("-").reverse();
+
+    let data = {
       user_id: searchDocument,
       isSaved: savedRef.current.checked,
-      startDate: dateRef.current.value,
+      startDate:
+        date.length === 1 ? "" : date[0] + "/" + date[1] + "/" + date[2],
       quantity: parseInt(quantityRef.current.value),
-    });
-    setLoading(true);
-    onCloseNew();
+    };
+
+    if (!objetoContieneValorVacio(data)) {
+      const response = await axios.post(apiUrl + "/layoffs/save/", data);
+      setLoading(true);
+      onCloseNew();
+    } else {
+      console.log("Hay datos vacios");
+    }
   };
 
   const handleDelete = async () => {
@@ -223,6 +250,7 @@ function Cesantias() {
                   if (!listEmployee) {
                     getEmpleados();
                   }
+                  setSelectEmployee();
                   onOpenNew();
                 }}
                 mr={"20px"}
@@ -389,8 +417,11 @@ function Cesantias() {
                   </FormLabel>
                   <Input
                     ref={dateRef}
-                    defaultValue={focus?.startDate}
-                    placeholder="dd/mm/aaaa"
+                    defaultValue={focus?.startDate
+                      .split("/")
+                      .reverse()
+                      .join("-")}
+                    type="date"
                   />
                 </FormControl>
 
@@ -459,7 +490,7 @@ function Cesantias() {
                   <FormLabel fontWeight={"bold"}>
                     Fecha de pago cesantia
                   </FormLabel>
-                  <Input ref={dateRef} placeholder="dd/mm/aaaa" />
+                  <Input ref={dateRef} type="date" />
                 </FormControl>
 
                 {!!selectEmployee && (

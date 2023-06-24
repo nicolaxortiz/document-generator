@@ -86,12 +86,13 @@ function UpdatePersonal() {
       !!address &&
       !!email
     ) {
+      const [año, mes, dia] = birthDate.split("-");
       try {
         const response = await axios.put(apiUrl + "/update/" + empleado?._id, {
           name,
           lastName,
           document,
-          birthDate,
+          birthDate: dia + "/" + mes + "/" + año,
           country,
           region,
           city,
@@ -164,10 +165,11 @@ function UpdatePersonal() {
 
           <label className="label">Fecha de nacimiento:</label>
           <input
-            type="text"
+            type="date"
             className="inpCorreo"
             ref={birthRef}
-            defaultValue={empleado?.birthDate}
+            pattern="\d{2}/\d{2}/\d{4}"
+            defaultValue={empleado?.birthDate.split("/").reverse().join("-")}
             placeholder="dd/mm/aaaa"
             required
           />
