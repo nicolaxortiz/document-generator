@@ -151,7 +151,7 @@ function Empleados() {
     };
 
     if (!objetoContieneValorVacio(data)) {
-      data.endData =
+      data.endDate =
         endDate.length === 1
           ? ""
           : endDate[0] + "/" + endDate[1] + "/" + endDate[2];
@@ -193,7 +193,7 @@ function Empleados() {
     };
 
     if (!objetoContieneValorVacio(data)) {
-      data.endData =
+      data.endDate =
         endDate.length === 1
           ? ""
           : endDate[0] + "/" + endDate[1] + "/" + endDate[2];
