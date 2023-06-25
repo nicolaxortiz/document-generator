@@ -125,7 +125,7 @@ function Empleados() {
   const handleSubmitUpdate = async () => {
     let birthDate = birthRef.current.value.split("-").reverse();
     let startDate = startRef.current.value.split("-").reverse();
-    let endDate = endRef.current.value.split("-").reverse();
+    let endDateValue = endRef.current.value.split("-").reverse();
 
     let data = {
       name: nameRef.current.value,
@@ -152,14 +152,16 @@ function Empleados() {
 
     if (!objetoContieneValorVacio(data)) {
       data.endDate =
-        endDate.length === 1
+        endDateValue.length === 1
           ? ""
-          : endDate[0] + "/" + endDate[1] + "/" + endDate[2];
+          : endDateValue[0] + "/" + endDateValue[1] + "/" + endDateValue[2];
 
       data.endContract =
-        endDate.length === 1
+        endDateValue.length === 1
           ? "No aplica"
-          : endDate[0] + "/" + endDate[1] + "/" + endDate[2];
+          : endDateValue[0] + "/" + endDateValue[1] + "/" + endDateValue[2];
+
+      console.log(data);
 
       const response = await axios.put(apiUrl + "/update/" + focus._id, data);
       setLoading(true);
