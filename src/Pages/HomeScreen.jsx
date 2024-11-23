@@ -224,7 +224,7 @@ function HomeScreen() {
                 <img src={layoffsImg} alt="" className="imgCert" />
                 <p className="titleBox">Paz y salvo</p>
                 <p className="subBox">
-                  Genera un documento para conocer si tus pagos estan al dia.
+                  Genera un documento para conocer si tus pagos están al dia.
                 </p>
               </div>
             )}

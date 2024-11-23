@@ -86,26 +86,36 @@ function UpdatePersonal() {
       !!address &&
       !!email
     ) {
-      const [año, mes, dia] = birthDate.split("-");
-      try {
-        const response = await axios.put(apiUrl + "/update/" + empleado?._id, {
-          name,
-          lastName,
-          document,
-          birthDate: dia + "/" + mes + "/" + año,
-          country,
-          region,
-          city,
-          address,
-          email,
-        });
-        if (response.status === 200) {
+      if (email.includes("@")) {
+        const [año, mes, dia] = birthDate.split("-");
+        try {
+          const response = await axios.put(
+            apiUrl + "/update/" + empleado?._id,
+            {
+              name,
+              lastName,
+              document,
+              birthDate: dia + "/" + mes + "/" + año,
+              country,
+              region,
+              city,
+              address,
+              email,
+            }
+          );
+          if (response.status === 200) {
+            setTimeout(() => {
+              onOpenMsg();
+              setLogin(false);
+            }, 3000);
+          }
+        } catch (error) {
           setTimeout(() => {
-            onOpenMsg();
             setLogin(false);
+            onOpen();
           }, 3000);
         }
-      } catch (error) {
+      } else {
         setTimeout(() => {
           setLogin(false);
           onOpen();
@@ -210,7 +220,7 @@ function UpdatePersonal() {
             required
           />
 
-          <label className="label">Correo Electronico:</label>
+          <label className="label">Correo Electrónico:</label>
           <input
             type="email"
             className="inpCorreo"

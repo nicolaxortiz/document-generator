@@ -315,7 +315,7 @@ function Nominas() {
           <Modal isOpen={isOpenLook} onClose={onCloseLook}>
             <ModalOverlay />
             <ModalContent>
-              <ModalHeader>Informacion de la nomina</ModalHeader>
+              <ModalHeader>Información de la nomina</ModalHeader>
               <ModalCloseButton />
               <ModalBody>
                 <FormControl>
@@ -611,7 +611,7 @@ function Nominas() {
               <ModalHeader>¿Seguro que desea eliminar esta nomina?</ModalHeader>
               <ModalCloseButton />
               <ModalBody>
-                Esta accion es irreversible, si eliminas una nomina no podrás
+                Esta acción es irreversible, si eliminas una nomina no podrás
                 recuperar su información.
               </ModalBody>
 

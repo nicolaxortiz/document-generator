@@ -76,7 +76,7 @@ function ForgotPassword() {
       <Header />
       <Main>
         <div className="loginBox">
-          <p className="titlePassword">Recuperacion de contraseña</p>
+          <p className="titlePassword">Recuperación de contraseña</p>
 
           {isVisible && (
             <Alert status="error" mb={"15px"}>
@@ -97,7 +97,7 @@ function ForgotPassword() {
             required
           />
 
-          <label className="label">Correo electronico:</label>
+          <label className="label">Correo electrónico:</label>
           <input type="text" className="inpCorreo" ref={emailRef} required />
 
           <button
@@ -125,7 +125,7 @@ function ForgotPassword() {
             <ModalCloseButton />
             <ModalHeader>Contraseña Enviada</ModalHeader>
             <ModalBody>
-              Hemos enviado tu contraseña a tu correo electronico, recuerda
+              Hemos enviado tu contraseña a tu correo electrónico, recuerda
               modificarla más tarde por tu seguridad.
             </ModalBody>
 

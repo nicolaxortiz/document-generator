@@ -78,7 +78,7 @@ function Login() {
         </Alert>
       )}
 
-      <label className="label">Correo Electronico</label>
+      <label className="label">Correo Electrónico</label>
       <input type="text" className="inpCorreo" ref={emailInput} required />
       <label className="label">Contraseña</label>
       <input type="password" className="inpPass" ref={passwordInput} required />

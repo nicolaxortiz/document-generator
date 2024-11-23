@@ -255,11 +255,11 @@ function Cesantias() {
                 }}
                 mr={"20px"}
               >
-                Agregar nueva cesantia
+                Agregar nueva cesantía
               </Button>
             </WrapItem>
             <WrapItem>
-              <p>Buscar cesantia:</p>
+              <p>Buscar cesantía:</p>
             </WrapItem>
             <WrapItem>
               <Input
@@ -337,7 +337,7 @@ function Cesantias() {
           <Modal isOpen={isOpenLook} onClose={onCloseLook}>
             <ModalOverlay />
             <ModalContent>
-              <ModalHeader>Cesantia {focus?._id}</ModalHeader>
+              <ModalHeader>Cesantía {focus?._id}</ModalHeader>
               <ModalCloseButton />
               <ModalBody>
                 <SimpleGrid columns={2} spacing={5}>
@@ -361,7 +361,7 @@ function Cesantias() {
 
                 <FormControl mt={4}>
                   <FormLabel fontWeight={"bold"}>
-                    Fecha de pago cesantia
+                    Fecha de pago cesantía
                   </FormLabel>
                   <p>{focus?.startDate}</p>
                 </FormControl>
@@ -391,7 +391,7 @@ function Cesantias() {
           <Modal isOpen={isOpenUpdate} onClose={onCloseUpdate}>
             <ModalOverlay />
             <ModalContent>
-              <ModalHeader>Editando Cesantia {focus?._id}</ModalHeader>
+              <ModalHeader>Editando Cesantía {focus?._id}</ModalHeader>
               <ModalCloseButton />
               <ModalBody>
                 <SimpleGrid columns={2} spacing={5}>
@@ -413,7 +413,7 @@ function Cesantias() {
 
                 <FormControl mt={4}>
                   <FormLabel fontWeight={"bold"}>
-                    Fecha de pago cesantia
+                    Fecha de pago cesantía
                   </FormLabel>
                   <Input
                     ref={dateRef}
@@ -463,7 +463,7 @@ function Cesantias() {
           <Modal isOpen={isOpenNew} onClose={onCloseNew}>
             <ModalOverlay />
             <ModalContent>
-              <ModalHeader>Agregar nueva cesantia</ModalHeader>
+              <ModalHeader>Agregar nueva cesantía</ModalHeader>
               <ModalCloseButton />
               <ModalBody>
                 <FormControl>
@@ -488,7 +488,7 @@ function Cesantias() {
 
                 <FormControl mt={4}>
                   <FormLabel fontWeight={"bold"}>
-                    Fecha de pago cesantia
+                    Fecha de pago cesantía
                   </FormLabel>
                   <Input ref={dateRef} type="date" />
                 </FormControl>
@@ -542,7 +542,7 @@ function Cesantias() {
               <ModalHeader>¿Seguro que desea eliminar la cesantia?</ModalHeader>
               <ModalCloseButton />
               <ModalBody>
-                Esta accion es irreversible, si eliminas esta cesantia no podras
+                Esta acción es irreversible, si eliminas esta cesantía no podrás
                 recuperar su información.
               </ModalBody>
 

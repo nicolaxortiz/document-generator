@@ -50,7 +50,7 @@ function HeaderNav() {
           <p className="navText" onClick={handleEmail}>
             empresaejemplo01@outlook.com
           </p>
-          <img src={phone} alt="Telefono" className="imgPhone" />
+          <img src={phone} alt="Teléfono" className="imgPhone" />
           <p className="navText"> +57 3187656743</p>
         </div>
         <div className="col-2">
@@ -131,7 +131,7 @@ function HeaderNav() {
                 ¿No entiendes como funciona?
               </PopoverHeader>
               <PopoverBody>
-                Tranquilo, aqui tienes el manual de usuario.
+                Tranquilo, aquí tienes el manual de usuario.
               </PopoverBody>
               <PopoverFooter
                 border="0"

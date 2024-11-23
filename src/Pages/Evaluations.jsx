@@ -251,7 +251,7 @@ function Evaluations() {
                   <Tr>
                     <Th>Nombre empleado</Th>
                     <Th>Documento empleado</Th>
-                    <Th>Fecha evaluacion</Th>
+                    <Th>Fecha evaluación</Th>
                     <Th>Opciones</Th>
                   </Tr>
                 </Thead>
@@ -307,7 +307,7 @@ function Evaluations() {
           <Modal isOpen={isOpenLook} onClose={onCloseLook}>
             <ModalOverlay />
             <ModalContent>
-              <ModalHeader>Informacion de la evaluación</ModalHeader>
+              <ModalHeader>Información de la evaluación</ModalHeader>
               <ModalCloseButton />
               <ModalBody>
                 <FormControl>
@@ -357,7 +357,7 @@ function Evaluations() {
 
                   <FormControl mt={4}>
                     <FormLabel fontWeight={"bold"}>
-                      Solucion de problemas:{" "}
+                      Solución de problemas:{" "}
                     </FormLabel>
                     <p>{focus?.topics.problemSolving.value}</p>
                   </FormControl>
@@ -463,7 +463,7 @@ function Evaluations() {
 
                   <FormControl mt={4}>
                     <FormLabel fontWeight={"bold"}>
-                      Solucion de problemas:{" "}
+                      Solución de problemas:{" "}
                     </FormLabel>
                     <Input
                       defaultValue={focus?.topics.problemSolving.value}
@@ -564,7 +564,7 @@ function Evaluations() {
 
                 <FormControl mt={4}>
                   <FormLabel fontWeight={"bold"}>
-                    Posicion del evaluador
+                    Posición del evaluador
                   </FormLabel>
                   <Input ref={evaluatorPositionRef} />
                 </FormControl>
@@ -595,7 +595,7 @@ function Evaluations() {
 
                   <FormControl mt={4}>
                     <FormLabel fontWeight={"bold"}>
-                      Solucion de problemas:{" "}
+                      Solución de problemas:{" "}
                     </FormLabel>
                     <Input ref={problemRef} />
                   </FormControl>
@@ -648,7 +648,7 @@ function Evaluations() {
               <ModalHeader>¿Deseas eliminar esta evaluación?</ModalHeader>
               <ModalCloseButton />
               <ModalBody>
-                Esta acción es irreversible, si eliminas una evaluaciónn no
+                Esta acción es irreversible, si eliminas una evaluación no
                 podrás recuperar su información.
               </ModalBody>
 

@@ -98,9 +98,9 @@ function AdminPage() {
               }}
             >
               <img src={Layoffs} alt="" className="imgCert" />
-              <p className="titleBox">Cesantias</p>
+              <p className="titleBox">Cesantías</p>
               <p className="subBox">
-                Crear y editar las censantias de los trabajadores
+                Crear y editar las cesantías de los trabajadores
               </p>
             </div>
           </GridItem>

@@ -13,13 +13,13 @@ function ServerError() {
       <Main>
         <img src={errorImg} alt="eror404" className="errorImg"></img>
         <p className="errorMessage">
-          Lo sentimos, parece que hubo un problema, intentalo mas tarde.
+          Lo sentimos, parece que hubo un problema, inténtalo mas tarde.
         </p>
         <p className="divider"></p>
         <p className="errorQuestion">¿Qué debo hacer ahora?</p>
         <p className="errorInformation">
-          Puedes comunicarte con el correo de soporte o con la linea movil para
-          una pronta solucion de este inconveniente.
+          Puedes comunicarte con el correo de soporte o con la linea móvil para
+          una pronta solución de este inconveniente.
         </p>
       </Main>
       <Footer />
