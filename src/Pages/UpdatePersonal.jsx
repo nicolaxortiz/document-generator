@@ -212,7 +212,7 @@ function UpdatePersonal() {
 
           <label className="label">Correo Electronico:</label>
           <input
-            type="text"
+            type="email"
             className="inpCorreo"
             ref={emailRef}
             defaultValue={empleado?.email}
